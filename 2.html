@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+</head>
+<body>
+	<div id="id"></div>
+</body>
+
+<script type="text/babel" >
+	let arr = ['heihei','hehe','lala'];
+	ReactDOM.render(
+	<div>{
+		arr.map(function(val){
+			return <li>hello {val}</li>
+		})
+	}</div>,
+	document.querySelector('#id'))
+</script>
+</html>
