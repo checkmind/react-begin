@@ -52,6 +52,26 @@ var HeloMan = React.createClass({
 			}
 	})
 //embedded: Adjacent JSX elements must be wrapped in an enclosing tag
+```  
+## 子组件  
+可以通过`this.props.children`获取当前子组件，也就是一下代码中的span节点，也可以通过React.Children来获取所有子组件。  
+```javascript
+var HeloMan = React.createClass({
+		render :function(){
+		return (<ol>{
+						React.Children.map(this.props.children,function(child){
+							return <li>{child}</li>
+						})
+				}</ol>)
+		}
+	})
+	ReactDOM.render(
+		<HeloMan>
+			<span>heihei</span>
+			<span>heihe</span>
+			<span>heihi</span>
+		</HeloMan>,
+	document.querySelector('#id'))
 ```
 
 
