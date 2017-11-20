@@ -73,6 +73,51 @@ var HeloMan = React.createClass({
 		</HeloMan>,
 	document.querySelector('#id'))
 ```
+## 属性约定  
+父组件可以通过props给子组件传值，但假如我们要给同事写子组件，而同事不知道prop的类型，  
+就会产生不必要的错误、降低开发效率。所以为了组件的健全性，我们可以通过propType指定prop的类型以此  
+类约束变量类型。  
+```javascript
+var HeloMan = React.createClass({
+		getDefaultProps: function(){
+			return {
+				title: 'hello man'
+			}
+		},
+		propTypes: {
+			title : React.PropTypes.string.isRequired
+		},
+		render :function(){
+			return (<h1>{this.props.title}</h1>)
+		}
+	})
+	let data = '5';
+	ReactDOM.render(<HeloMan title={data}></HeloMan>,
+	document.querySelector('#id'))
+```  
+以上代码中，title属性的值必须是字符串，如果是其他类型，则控制台会报错。以此来约束属性的类型。  
+你也可以看到上述代码有一个getDefaultProps属性，他也给属性指定一个默认值，如果未设置该属性，则采用默认值。  
+## 真实节点  
+像vue和react这类的框架，为了减少DOM操作数，都会在改变DOM前构建虚拟DOM，从而当数据发生改变时，先修改虚拟DOM，监控DOM树的变化批量的修改DOM，从而减少DOM操作，增加网页性能。所以当数据改变的时候，真实的DOM节点有可能并未改变。因此如果我们需要获取真实节点就要注意到这一点。那么怎么在react中获取真实节点呢。React提供了一个叫做ref的属性。    
+```javascript
+	var HeloMan = React.createClass({
+		callMyName: function(){
+			console.log(this.refs.callname);
+		},
+		render :function(){
+			return (<h1 ref='callname' onClick={this.callMyName}>{this.callMyName()}my name is duhao</h1>)
+		}
+	})
+
+	let data = '5';
+	ReactDOM.render(
+		<HeloMan>
+		</HeloMan>,
+	document.querySelector('#id'))
+```
+在以上代码中，子组件定义了callMyName事件，并且在组件内部绑定click事件调用该事件，在事件内部用refs获取真实节点。  
+找到ref属性对应的节点。因为当click的时候节点肯定已经添加完成，所以可以得到预期结果，而在组件的text中，同样的调用了这个事件，但却打印出undefined，这是以为刚开始的时候真实节点还没有构建完成。  
+
 
 
 
