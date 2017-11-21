@@ -117,6 +117,74 @@ var HeloMan = React.createClass({
 ```
 在以上代码中，子组件定义了callMyName事件，并且在组件内部绑定click事件调用该事件，在事件内部用refs获取真实节点。  
 找到ref属性对应的节点。因为当click的时候节点肯定已经添加完成，所以可以得到预期结果，而在组件的text中，同样的调用了这个事件，但却打印出undefined，这是以为刚开始的时候真实节点还没有构建完成。  
+## 组件状态  
+在react中，组件是可变的，当组件的属性发生变化时，组件的render函数就会重新绘制一遍。  
+```javascript
+	var HeloMan = React.createClass({
+		getInitialState() {
+			return {
+				onoff : true
+			}
+		},
+		changeLight() {
+			this.setState({
+				onoff : !this.state.onoff
+			})
+		},
+		render :function(){
+			var lightState = this.state.onoff?'turn down': 'turn up';
+			return (<h1 ref='callname' onClick={this.changeLight}>{lightState}</h1>)
+		}
+	})
+	ReactDOM.render(
+		<HeloMan>
+		</HeloMan>,
+	document.querySelector('#id'))
+```  
+getInitialState函数用来初始化属性。而用setState来通知render发生重新渲染。所以你手动的改变state的状态是无效的。  
+## 组件的生命周期
+react组件的生命周期相比vue要明了很多了。  
+```javascript
+	var HeloMan = React.createClass({
+		componentWillMount() {
+			console.log('componentWillMount')
+			console.log(document.querySelector('#id h1'))
+		},
+		componentDidMount() {
+			console.log('componentDidMount')
+			console.log(document.querySelector('#id h1'))
+		},
+		componentWillUpdate() {
+			console.log('componentWillUpdate')
+			console.log(this.state.onoff);
+		},
+		componentDidUpdate() {
+			console.log('componentDidUpdate')
+			console.log(this.state.onoff);
+		},
+		componentWillUnmount(){
+			console.log('componentWillUnmount')
+		},
+		getInitialState() {
+			return {
+				onoff : true
+			}
+		},
+		changeLight() {	
+			this.setState({
+				onoff : !this.state.onoff
+			})	
+		},
+		render :function(){
+			var lightState = this.state.onoff?'turn down': 'turn up';
+			return (<h1 ref='callname' onClick={this.changeLight}>{lightState}</h1>)
+		}
+	})
+	ReactDOM.render(
+		<HeloMan>
+		</HeloMan>,
+	document.querySelector('#id'))
+```
 
 
 

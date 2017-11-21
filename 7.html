@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+</head>
+<body>
+	<div id="id"></div>
+</body>
+
+<script type="text/babel" >
+	var HeloMan = React.createClass({
+		getInitialState() {
+			return {
+				onoff : true
+			}
+		},
+		changeLight() {	
+			this.setState({
+				onoff : !this.state.onoff
+			})	
+		},
+		render :function(){
+			var lightState = this.state.onoff?'turn down': 'turn up';
+			return (<h1 ref='callname' onClick={this.changeLight}>{lightState}</h1>)
+		}
+	})
+	ReactDOM.render(
+		<HeloMan>
+		</HeloMan>,
+	document.querySelector('#id'))
+
+</script>
+</html>
