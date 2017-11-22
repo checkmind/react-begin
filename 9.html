@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+</head>
+<body>
+	<div id="id"></div>
+</body>
+
+<script type="text/babel" >
+	class HelloMan extends React.Component{
+		render (){
+			return (<div>{this.props.pName}是通过类方法继承来的</div>);
+		}
+	}
+	ReactDOM.render(
+		<HelloMan pName={'TOM'}>
+		</HelloMan>,
+	document.querySelector('#id'))
+
+</script>
+</html>

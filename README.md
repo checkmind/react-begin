@@ -185,7 +185,7 @@ react组件的生命周期相比vue要明了很多了。
 		</HeloMan>,
 	document.querySelector('#id'))
 ```
-
+## 继承
 
 
 
