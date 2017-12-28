@@ -1,5 +1,5 @@
-# react-begin
-刚找到新工作，工作中可能会用到react，所以入门一下react。  
+# react-begin  
+每个标题对应一个html文件，依次对照打开浏览就行了。  
 主要参考：[链接](http://www.ruanyifeng.com/blog/2015/03/react.html)  
 # 浏览器端使用react  
 首先引用三个js文件  
@@ -24,9 +24,8 @@
 		arr.map(function(val){
 			return <li>hello {val}</li>
 		})
-	}</div>,
-	document.querySelector('#id'))
-```
+	}</div>,document.querySelector('#id'))
+````
 render函数内部可以插入html片段。使用map循环来渲染一个列表  
 ## 数组  
 如果直接填充数组，则render将渲染数组的所有成员。  
@@ -52,7 +51,7 @@ var HeloMan = React.createClass({
 			}
 	})
 //embedded: Adjacent JSX elements must be wrapped in an enclosing tag
-```  
+```
 ## 子组件  
 可以通过`this.props.children`获取当前子组件，也就是一下代码中的span节点，也可以通过React.Children来获取所有子组件。  
 ```javascript
@@ -94,11 +93,12 @@ var HeloMan = React.createClass({
 	let data = '5';
 	ReactDOM.render(<HeloMan title={data}></HeloMan>,
 	document.querySelector('#id'))
-```  
+```
 以上代码中，title属性的值必须是字符串，如果是其他类型，则控制台会报错。以此来约束属性的类型。  
 你也可以看到上述代码有一个getDefaultProps属性，他也给属性指定一个默认值，如果未设置该属性，则采用默认值。  
 ## 真实节点  
-像vue和react这类的框架，为了减少DOM操作数，都会在改变DOM前构建虚拟DOM，从而当数据发生改变时，先修改虚拟DOM，监控DOM树的变化批量的修改DOM，从而减少DOM操作，增加网页性能。所以当数据改变的时候，真实的DOM节点有可能并未改变。因此如果我们需要获取真实节点就要注意到这一点。那么怎么在react中获取真实节点呢。React提供了一个叫做ref的属性。    
+像vue和react这类的框架，为了减少DOM操作数，都会在改变DOM前构建虚拟DOM，从而当数据发生改变时，先修改虚拟DOM，监控DOM树的变化批量的修改DOM，从而减少DOM操作，增加网页性能。所以当数据改变的时候，真实的DOM节点有可能并未改变。因此如果我们需要获取真实节点就要注意到这一点。那么怎么在react中获取真实节点呢。React提供了一个叫做ref的属性。  
+
 ```javascript
 	var HeloMan = React.createClass({
 		callMyName: function(){
